@@ -26,7 +26,6 @@ def lost_game(game):
 def test_defaults(default_game):
     assert default_game.num_guesses == hangman.Game.default_guesses
     assert default_game.wrong_guesses == 0
-    assert default_game.remaining_guesses == hangman.Game.default_guesses
     # Default is to look in /usr/share/dict/words
     assert len(default_game.word_list) > 0
     assert default_game.word is not None
