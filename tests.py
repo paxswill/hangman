@@ -88,6 +88,23 @@ def test_perfect_guesses(game):
     assert game.state == hangman.GameState.WON
 
 
+def test_repeat_guesses(game):
+    assert game.wrong_guesses == 0
+    assert game.letters == [None, None, None, None, None, None]
+    game.guess('o')
+    assert game.wrong_guesses == 0
+    assert game.letters == [None, 'o', 'o', None, None, None]
+    game.guess('c')
+    assert game.wrong_guesses == 1
+    assert game.letters == [None, 'o', 'o', None, None, None]
+    game.guess('o')
+    assert game.wrong_guesses == 1
+    assert game.letters == [None, 'o', 'o', None, None, None]
+    game.guess('c')
+    assert game.wrong_guesses == 1
+    assert game.letters == [None, 'o', 'o', None, None, None]
+
+
 def test_reset(lost_game):
     lost_game.reset()
     assert lost_game.state == hangman.GameState.INPROGRESS
