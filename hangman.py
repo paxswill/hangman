@@ -31,6 +31,9 @@ class Game(object):
         self.word = random.choice(self.word_list)
         self._wrong_guesses = set()
         self.letters = list([None for _ in range(len(self.word))])
+        # Spaces are special-cased
+        if ' ' in self.word:
+            self.guess(' ')
         self.state = GameState.INPROGRESS
 
     @property
