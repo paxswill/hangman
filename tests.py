@@ -33,7 +33,7 @@ def test_defaults(default_game):
     assert len(default_game.word) == len(default_game.current_letters)
     empty_letters = list([None for _ in range(len(default_game.word))]) 
     assert empty_letters == default_game.letters
-    assert default_game.state == hangman.GameState.InProgress
+    assert default_game.state == hangman.GameState.INPROGRESS
     assert !game.finished
 
 
@@ -60,7 +60,7 @@ def test_wrong_guesses(game):
     assert game.wrong_guesses == 3
     game.guess('g')
     assert game.wrong_guesses == 4
-    assert game.state == hangman.GameState.Lost
+    assert game.state == hangman.GameState.LOST
     assert game.finished
 
 
@@ -71,7 +71,7 @@ def test_extra_wrong_guesses(lost_game):
 
 def test_reset(lost_game):
     lost_game.reset()
-    assert lost_game.state == hangman.GameState.InProgress
+    assert lost_game.state == hangman.GameState.INPROGRESS
     assert !lost_game.finished
     assert lost_game.wrong_guesses == 0
 
@@ -92,4 +92,4 @@ def test_perfect_guesses(game):
     assert game.wrong_guesses == 0
     assert game.letters == ['F', 'o', 'o', 'B', 'a', 'r']
     assert game.finished
-    assert game.state == hangman.GameState.Won
+    assert game.state == hangman.GameState.WON
