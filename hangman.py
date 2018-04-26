@@ -22,8 +22,8 @@ class Game(object):
     def __init__(self, num_guesses=default_guesses, word_list=None):
         self.num_guesses = num_guesses
         if word_list is None:
-            with open('/usr/share/dict/words', 'r') as words_file:
-                word_list = list(words_file)
+            with open('/usr/share/dict/words', 'r') as words:
+                word_list = [w if w[-1] != '\n' else w[:-1] for w in words]
         self.word_list = list(word_list)
         self.reset()
 
