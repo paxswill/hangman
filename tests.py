@@ -19,7 +19,7 @@ def game():
 @pytest.fixture
 def lost_game(game):
     game.guess('cdeg')
-    assert lost_game.finished
+    assert game.finished
     return game
 
 

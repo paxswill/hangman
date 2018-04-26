@@ -12,6 +12,9 @@ class GameState(enum.Enum):
     WON = 2
 
 
+class GameFinished(Exception): pass
+
+
 class Game(object):
 
     default_guesses = 7
@@ -35,8 +38,8 @@ class Game(object):
         return self.state != GameState.INPROGRESS
 
     def guess(self, guesses):
-        if not self.finished:
-            raise 
+        if self.finished:
+            raise GameFinished()
         # Use lowercase for normalization
         lower_word = self.word.lower()
         for guess in guesses:
@@ -46,3 +49,4 @@ class Game(object):
                 self.wrong_guesses += 1
                 if self.wrong_guesses >= self.num_guesses:
                     self.state = GameState.LOST
+                    break
