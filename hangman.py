@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import enum
 import random
 
@@ -64,3 +65,37 @@ class Game(object):
                 if self.wrong_guesses >= self.num_guesses:
                     self.state = GameState.LOST
                     break
+
+
+def print_ui(game):
+    letters = [l if l is not None else '_' for l in game.letters]
+    print("Current letters: {}".format(" ".join(letters)))
+    print("Remaining guesses: {}".format(
+        game.num_guesses - game.wrong_guesses))
+
+
+def play_game():
+    parser = argparse.ArgumentParser(description=u'Play hangman')
+    parser.add_argument('-n', '--num_guesses', default=Game.default_guesses,
+                        type=int, help="The number of wrong guesses allowed.")
+    args = parser.parse_args()
+    game = Game(num_guesses=args.num_guesses)
+    should_exit = False
+    while not should_exit:
+        while not game.finished:
+            print_ui(game)
+            guess = input("Guess: ")
+            game.guess(guess)
+        if game.state == GameState.WON:
+            print("Congratulations, you won, the word was '{}'".format(
+                      game.word))
+        elif game.state == GameState.LOST:
+            print("Sorry, you lost. The word was '{}'".format(game.word))
+        continue_string = input("Play again? [y/N]: ")
+        if len(continue_string) == 0 or continue_string[0].lower() != 'y':
+            should_exit = True
+        else:
+            game.reset()
+
+if __name__ == '__main__':
+    play_game()
