@@ -29,11 +29,11 @@ def test_defaults(default_game):
     # Default is to look in /usr/share/dict/words
     assert len(default_game.word_list) > 0
     assert default_game.word is not None
-    assert len(default_game.word) == len(default_game.current_letters)
+    assert len(default_game.word) == len(default_game.letters)
     empty_letters = list([None for _ in range(len(default_game.word))]) 
     assert empty_letters == default_game.letters
     assert default_game.state == hangman.GameState.INPROGRESS
-    assert not game.finished
+    assert not default_game.finished
 
 
 def test_custom_guesses():
