@@ -69,13 +69,6 @@ def test_extra_wrong_guesses(lost_game):
         lost_game.guess('h')
 
 
-def test_reset(lost_game):
-    lost_game.reset()
-    assert lost_game.state == hangman.GameState.INPROGRESS
-    assert !lost_game.finished
-    assert lost_game.wrong_guesses == 0
-
-
 def test_perfect_guesses(game):
     assert game.wrong_guesses == 0
     assert game.letters == [None, None, None, None, None, None]
@@ -93,3 +86,10 @@ def test_perfect_guesses(game):
     assert game.letters == ['F', 'o', 'o', 'B', 'a', 'r']
     assert game.finished
     assert game.state == hangman.GameState.WON
+
+
+def test_reset(lost_game):
+    lost_game.reset()
+    assert lost_game.state == hangman.GameState.INPROGRESS
+    assert !lost_game.finished
+    assert lost_game.wrong_guesses == 0
