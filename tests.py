@@ -46,7 +46,7 @@ def test_custom_word_list():
     game = hangman.Game(word_list=word_list)
     # Asserting length, not the identity of game.word_list as I might be
     # converting the word list to a different data structure in the future
-    assert len(game.word_list) == word_list
+    assert len(game.word_list) == len(word_list)
     assert game.word in word_list
 
 
