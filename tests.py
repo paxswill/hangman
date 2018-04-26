@@ -33,7 +33,7 @@ def test_defaults(default_game):
     empty_letters = list([None for _ in range(len(default_game.word))]) 
     assert empty_letters == default_game.letters
     assert default_game.state == hangman.GameState.INPROGRESS
-    assert !game.finished
+    assert not game.finished
 
 
 def test_custom_guesses():
@@ -107,5 +107,5 @@ def test_repeat_guesses(game):
 def test_reset(lost_game):
     lost_game.reset()
     assert lost_game.state == hangman.GameState.INPROGRESS
-    assert !lost_game.finished
+    assert not lost_game.finished
     assert lost_game.wrong_guesses == 0
