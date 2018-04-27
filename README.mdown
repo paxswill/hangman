@@ -1,0 +1,2 @@
+This is just a simple project demonstrating I can write a quick little word
+guessing game, in the style of hangman.
